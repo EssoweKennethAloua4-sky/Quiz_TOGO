@@ -32,7 +32,7 @@ git push
 2. Tape :
 
 ```bash
-git clone https://github.com/kennethaloua00-spec/Quiz_TOGO.git
+git clone https://github.com/EssoweKennethAloua4-sky/Quiz_TOGO.git
 pip3.13 install --user flask
 ```
 

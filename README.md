@@ -42,7 +42,7 @@ Quiz_TOGO/
 ### 1. Cloner le dépôt
 
 ```bash
-git clone https://github.com/TON_USERNAME/Quiz_TOGO.git
+git clone https://github.com/EssoweKennethAloua4-sky/Quiz_TOGO.git
 cd Quiz_TOGO
 ```
 
