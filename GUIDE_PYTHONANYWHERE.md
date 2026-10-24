@@ -1,6 +1,9 @@
-# 🌍 Guide — Mettre le quiz et le sondage en ligne sur PythonAnywhere
+# 🌍 Guide — Mettre le quiz en ligne sur PythonAnywhere
 
 Dans ce guide, remplace **TONPSEUDO** par ton nom d'utilisateur PythonAnywhere.
+
+> Le compte gratuit ne permet qu'**une seule application web**. Si le sondage (projet `Sondage_TOGO`)
+> est déjà en ligne sur ce compte, il faut d'abord le supprimer (onglet **Web** → **Delete**), ou utiliser un autre compte.
 
 ---
 
@@ -10,11 +13,11 @@ Dans un terminal, dans le dossier `Quiz_TOGO` :
 
 ```bash
 git add .
-git commit -m "Version web, propositions de questions et sondage"
+git commit -m "Mise à jour du quiz"
 git push
 ```
 
-> Les fichiers `questions_proposees.csv` et `questions_sondage.csv` ne partent pas sur GitHub (ils sont dans `.gitignore`) : c'est voulu.
+> Le fichier `questions_proposees.csv` ne part pas sur GitHub (il est dans `.gitignore`) : c'est voulu.
 
 ---
 
@@ -66,10 +69,8 @@ from app import app as application
 
 ## ÉTAPE 5 — Tester
 
-- Le jeu : https://TONPSEUDO.pythonanywhere.com
-- Le sondage : https://TONPSEUDO.pythonanywhere.com/sondage
-
-Envoie une question de test dans le sondage, puis vérifie à l'étape 6 qu'elle est bien arrivée.
+Ouvre https://TONPSEUDO.pythonanywhere.com, joue une partie et propose une question de test à la fin,
+puis vérifie à l'étape 6 qu'elle est bien arrivée.
 
 > En cas de page d'erreur : onglet **Web** → section **Log files** → ouvre l'**error log** et regarde les dernières lignes.
 
@@ -78,10 +79,8 @@ Envoie une question de test dans le sondage, puis vérifie à l'étape 6 qu'elle
 ## ÉTAPE 6 — Récupérer les réponses
 
 1. Onglet **Files** → dossier `Quiz_TOGO`
-2. Clique sur l'icône de téléchargement à côté de :
-   - `questions_sondage.csv` → les réponses au sondage
-   - `questions_proposees.csv` → les questions proposées en fin de partie
-3. Ouvre-les dans Excel ou LibreOffice, garde les bonnes lignes et colle-les dans `questions_togo.csv`
+2. Clique sur l'icône de téléchargement à côté de `questions_proposees.csv` (les questions proposées en fin de partie)
+3. Ouvre-le dans Excel ou LibreOffice, garde les bonnes lignes et colle-les dans `questions_togo.csv`
    **sans les deux dernières colonnes** (« Proposé par » et « Date »)
 
 ---

@@ -11,8 +11,6 @@ Quiz_TOGO/
 │
 ├── questions_togo.csv     # Base de données des questions (vérifiées)
 ├── questions_proposees.csv# Questions proposées par les joueurs (créé automatiquement)
-├── questions_sondage.csv  # Réponses au sondage (créé automatiquement)
-├── sondage.html           # Formulaire de sondage pour récolter des questions
 ├── app.py                 # Serveur de la version web
 ├── index.html             # Version web : page
 ├── style.css              # Version web : apparence
@@ -97,13 +95,6 @@ avec la mention « Proposée par … · pas encore vérifiée ».
 5. Supprimer ces lignes de `questions_proposees.csv` (ou supprimer le fichier : il sera recréé à la prochaine proposition).
 
 Les questions recopiées dans `questions_togo.csv` n'affichent plus la mention « pas encore vérifiée ».
-
-### 📝 Sondage pour récolter des questions
-
-Un formulaire simple est disponible sur http://localhost:8000/sondage (même serveur que le jeu).
-Les réponses sont enregistrées dans `questions_sondage.csv`.
-Contrairement aux propositions de fin de partie, **elles n'entrent pas dans le jeu** tant qu'elles ne sont pas recopiées
-dans `questions_togo.csv` (même méthode que la vérification mensuelle).
 
 ### Serveur Flask (bot WhatsApp)
 

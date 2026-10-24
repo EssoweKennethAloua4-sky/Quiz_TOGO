@@ -12,21 +12,12 @@ from flask import Flask, jsonify, request, send_from_directory
 DOSSIER = os.path.dirname(os.path.abspath(__file__))
 FICHIER_QUESTIONS = os.path.join(DOSSIER, "questions_togo.csv")
 FICHIER_PROPOSEES = os.path.join(DOSSIER, "questions_proposees.csv")
-# Réponses du sondage : elles n'entrent pas dans le jeu avant d'être vérifiées
-FICHIER_SONDAGE = os.path.join(DOSSIER, "questions_sondage.csv")
 
 COLONNES = ["Catégorie", "Question", "Option 1", "Option 2", "Option 3", "Réponse Correcte"]
 COLONNES_PROPOSEES = COLONNES + ["Proposé par", "Date"]
 
-# True : seul le sondage est en ligne (l'adresse du site ouvre le formulaire, le jeu est caché).
-# Passer à False quand le jeu est prêt à être publié.
-SONDAGE_SEUL = True
-
 # Seuls ces fichiers du dossier sont accessibles depuis le navigateur
-if SONDAGE_SEUL:
-    FICHIERS_PUBLICS = {"sondage.html"}
-else:
-    FICHIERS_PUBLICS = {"index.html", "style.css", "script.js", "sondage.html", "questions_togo.csv", "questions_proposees.csv"}
+FICHIERS_PUBLICS = {"index.html", "style.css", "script.js", "questions_togo.csv", "questions_proposees.csv"}
 
 LONGUEUR_MAX_QUESTION = 200
 LONGUEUR_MAX_REPONSE = 80
@@ -52,12 +43,7 @@ def nettoyer(texte, longueur_max):
 
 @app.route("/")
 def accueil():
-    return send_from_directory(DOSSIER, "sondage.html" if SONDAGE_SEUL else "index.html")
-
-
-@app.route("/sondage")
-def page_sondage():
-    return send_from_directory(DOSSIER, "sondage.html")
+    return send_from_directory(DOSSIER, "index.html")
 
 
 @app.route("/<nom>")
@@ -73,17 +59,6 @@ def fichier(nom):
 
 @app.route("/proposer", methods=["POST"])
 def proposer():
-    if SONDAGE_SEUL:
-        return "Introuvable", 404
-    return enregistrer_question(FICHIER_PROPOSEES)
-
-
-@app.route("/sondage", methods=["POST"])
-def sondage():
-    return enregistrer_question(FICHIER_SONDAGE)
-
-
-def enregistrer_question(fichier):
     donnees = request.get_json(silent=True) or {}
 
     # Champ piège invisible : seuls les robots le remplissent
@@ -114,12 +89,12 @@ def enregistrer_question(fichier):
         return jsonify(ok=False, erreur="Indique la bonne réponse."), 400
 
     with verrou:
-        existantes = lire_csv(FICHIER_QUESTIONS) + lire_csv(FICHIER_PROPOSEES) + lire_csv(FICHIER_SONDAGE)
+        existantes = lire_csv(FICHIER_QUESTIONS) + lire_csv(FICHIER_PROPOSEES)
         if any(q["Question"].strip().lower() == question.lower() for q in existantes):
             return jsonify(ok=False, erreur="Cette question existe déjà."), 400
 
-        nouveau_fichier = not os.path.exists(fichier)
-        with open(fichier, "a", encoding="utf-8", newline="") as f:
+        nouveau_fichier = not os.path.exists(FICHIER_PROPOSEES)
+        with open(FICHIER_PROPOSEES, "a", encoding="utf-8", newline="") as f:
             writer = csv.writer(f)
             if nouveau_fichier:
                 writer.writerow(COLONNES_PROPOSEES)
