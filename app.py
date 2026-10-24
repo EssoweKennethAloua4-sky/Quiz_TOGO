@@ -18,8 +18,15 @@ FICHIER_SONDAGE = os.path.join(DOSSIER, "questions_sondage.csv")
 COLONNES = ["Catégorie", "Question", "Option 1", "Option 2", "Option 3", "Réponse Correcte"]
 COLONNES_PROPOSEES = COLONNES + ["Proposé par", "Date"]
 
+# True : seul le sondage est en ligne (l'adresse du site ouvre le formulaire, le jeu est caché).
+# Passer à False quand le jeu est prêt à être publié.
+SONDAGE_SEUL = True
+
 # Seuls ces fichiers du dossier sont accessibles depuis le navigateur
-FICHIERS_PUBLICS = {"index.html", "style.css", "script.js", "sondage.html", "questions_togo.csv", "questions_proposees.csv"}
+if SONDAGE_SEUL:
+    FICHIERS_PUBLICS = {"sondage.html"}
+else:
+    FICHIERS_PUBLICS = {"index.html", "style.css", "script.js", "sondage.html", "questions_togo.csv", "questions_proposees.csv"}
 
 LONGUEUR_MAX_QUESTION = 200
 LONGUEUR_MAX_REPONSE = 80
@@ -45,7 +52,7 @@ def nettoyer(texte, longueur_max):
 
 @app.route("/")
 def accueil():
-    return send_from_directory(DOSSIER, "index.html")
+    return send_from_directory(DOSSIER, "sondage.html" if SONDAGE_SEUL else "index.html")
 
 
 @app.route("/sondage")
@@ -66,6 +73,8 @@ def fichier(nom):
 
 @app.route("/proposer", methods=["POST"])
 def proposer():
+    if SONDAGE_SEUL:
+        return "Introuvable", 404
     return enregistrer_question(FICHIER_PROPOSEES)
 
 
