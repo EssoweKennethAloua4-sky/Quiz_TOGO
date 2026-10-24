@@ -1,0 +1,313 @@
+/* Couleurs du drapeau togolais */
+:root {
+    --vert: #006a4e;
+    --vert-fonce: #0b3d0b;
+    --jaune: #ffce00;
+    --rouge: #d21034;
+    --blanc: #ffffff;
+    --texte: #1d1d1d;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--vert-fonce);
+    color: var(--texte);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 16px 40px;
+}
+
+/* Bandes vertes et jaunes en haut de la page */
+.drapeau {
+    width: 100%;
+    max-width: 720px;
+    height: 10px;
+    margin: 24px 0;
+    border-radius: 5px;
+    background: repeating-linear-gradient(90deg, var(--vert) 0 20%, var(--jaune) 20% 40%);
+}
+
+.carte {
+    width: 100%;
+    max-width: 720px;
+    background: var(--blanc);
+    border-radius: 16px;
+    padding: 28px 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    border-top: 8px solid var(--rouge);
+}
+
+h1 {
+    margin: 0 0 20px;
+    text-align: center;
+    color: var(--vert);
+    font-size: 1.8rem;
+}
+
+h2 {
+    font-size: 1.3rem;
+    line-height: 1.4;
+    margin: 20px 0;
+}
+
+.sous-titre {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Choix de la catégorie */
+.categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.categorie {
+    padding: 14px;
+    border: 2px solid var(--vert);
+    border-radius: 10px;
+    background: var(--blanc);
+    color: var(--vert);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.categorie small {
+    display: block;
+    font-weight: 400;
+    color: #666;
+    margin-top: 4px;
+}
+
+.categorie.choisie {
+    background: var(--vert);
+    color: var(--blanc);
+}
+
+.categorie.choisie small {
+    color: #d8eee6;
+}
+
+/* Boutons */
+.bouton-principal {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: var(--jaune);
+    color: var(--texte);
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 16px;
+}
+
+.bouton-principal:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.bouton-secondaire {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--vert);
+    border-radius: 10px;
+    background: var(--blanc);
+    color: var(--vert);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* Question en cours */
+.entete {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+}
+
+.score {
+    color: var(--vert);
+}
+
+.barre {
+    height: 8px;
+    background: #e5e5e5;
+    border-radius: 4px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+#barre-remplie {
+    height: 100%;
+    width: 0;
+    background: var(--vert);
+    transition: width 0.3s;
+}
+
+.reponses {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.reponse {
+    text-align: left;
+    padding: 14px 16px;
+    border: 2px solid #d0d0d0;
+    border-radius: 10px;
+    background: var(--blanc);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.reponse:hover:not(:disabled) {
+    border-color: var(--vert);
+}
+
+.reponse:disabled {
+    cursor: default;
+    color: var(--texte);
+}
+
+.reponse.correcte {
+    border-color: var(--vert);
+    background: #e3f4ec;
+}
+
+.reponse.fausse {
+    border-color: var(--rouge);
+    background: #fbe4e8;
+}
+
+.retour {
+    min-height: 1.5em;
+    font-weight: 600;
+    margin: 16px 0 0;
+}
+
+/* Écran de fin */
+.score-final {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--vert);
+    margin: 0;
+}
+
+#message-final {
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.erreur-item {
+    border-left: 4px solid var(--rouge);
+    padding: 8px 12px;
+    margin: 10px 0;
+    background: #fafafa;
+}
+
+.erreur {
+    color: var(--rouge);
+    text-align: center;
+}
+
+/* Question proposée par un joueur */
+.badge {
+    display: inline-block;
+    margin: 16px 0 0;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: #fff4c2;
+    font-size: 0.85rem;
+}
+
+.badge + h2 {
+    margin-top: 10px;
+}
+
+/* Formulaire de proposition */
+.formulaire {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.formulaire label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-weight: 600;
+}
+
+.formulaire input[type="text"],
+.formulaire select,
+.formulaire textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #d0d0d0;
+    border-radius: 8px;
+    font: inherit;
+    font-weight: 400;
+}
+
+.formulaire input[type="text"]:focus,
+.formulaire select:focus,
+.formulaire textarea:focus {
+    outline: none;
+    border-color: var(--vert);
+}
+
+.formulaire fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.formulaire legend {
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.option input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--vert);
+    flex-shrink: 0;
+}
+
+.merci {
+    color: var(--vert);
+    text-align: center;
+}
+
+.piege {
+    position: absolute;
+    left: -9999px;
+}

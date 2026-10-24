@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connais-tu le Togo ?</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="drapeau"></div>
+
+    <main class="carte">
+
+        <h1>🇹🇬 Connais-tu le Togo ?</h1>
+
+        <!-- ACCUEIL -->
+        <section id="ecran-accueil">
+            <p class="sous-titre">Choisis une catégorie</p>
+            <div id="categories" class="categories"></div>
+            <button id="bouton-commencer" class="bouton-principal" disabled>🚀 Commencer le quiz</button>
+            <p id="erreur-chargement" class="erreur" hidden></p>
+        </section>
+
+        <!-- QUESTION -->
+        <section id="ecran-question" hidden>
+            <div class="entete">
+                <span id="progression"></span>
+                <span id="score" class="score">Score : 0</span>
+            </div>
+            <div class="barre"><div id="barre-remplie"></div></div>
+            <p id="badge-proposee" class="badge" hidden></p>
+            <h2 id="question"></h2>
+            <div id="reponses" class="reponses"></div>
+            <p id="retour" class="retour"></p>
+            <button id="bouton-suivant" class="bouton-principal" hidden>Question suivante ➜</button>
+        </section>
+
+        <!-- FIN -->
+        <section id="ecran-fin" hidden>
+            <p class="sous-titre">🏁 Fin du quiz</p>
+            <p id="score-final" class="score-final"></p>
+            <p id="message-final"></p>
+            <div id="erreurs"></div>
+            <button id="bouton-rejouer" class="bouton-principal">🔁 Rejouer</button>
+            <button id="bouton-proposer" class="bouton-secondaire">➕ Proposer une question</button>
+        </section>
+
+        <!-- PROPOSER UNE QUESTION -->
+        <section id="ecran-proposer" hidden>
+            <p class="sous-titre">➕ Propose ta question sur le Togo</p>
+
+            <form id="formulaire" class="formulaire">
+                <label>Catégorie
+                    <select id="champ-categorie" required></select>
+                </label>
+
+                <label>Question
+                    <textarea id="champ-question" maxlength="200" rows="2" required></textarea>
+                </label>
+
+                <fieldset>
+                    <legend>Les 3 réponses (coche la bonne)</legend>
+                    <div class="option"><input type="radio" name="bonne" value="0" required><input type="text" class="champ-option" maxlength="80" placeholder="Réponse A" required></div>
+                    <div class="option"><input type="radio" name="bonne" value="1"><input type="text" class="champ-option" maxlength="80" placeholder="Réponse B" required></div>
+                    <div class="option"><input type="radio" name="bonne" value="2"><input type="text" class="champ-option" maxlength="80" placeholder="Réponse C" required></div>
+                </fieldset>
+
+                <label>Ton prénom ou pseudo (facultatif)
+                    <input type="text" id="champ-pseudo" maxlength="40">
+                </label>
+
+                <!-- Champ piège invisible contre les robots -->
+                <input type="text" id="champ-site-web" class="piege" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+                <p id="message-formulaire" class="retour"></p>
+                <button type="submit" id="bouton-envoyer" class="bouton-principal">📨 Envoyer ma question</button>
+            </form>
+
+            <p id="message-merci" class="retour merci" hidden>✅ Merci ! Ta question est déjà dans le quiz.</p>
+            <button id="bouton-rejouer-2" class="bouton-secondaire">🔁 Rejouer</button>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
